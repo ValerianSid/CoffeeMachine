@@ -26,15 +26,18 @@ public class CoffeeMachine {
 
     public CoffeeMachine() {
         this.coffeContainer = new CoffeeContainer(10);
-        this.garbageContainer = new GarbageContainer(5);
+        this.garbageContainer = new GarbageContainer(0);
         this.milkContainer = new MilkContainer(3);
-        this.waterContainer = new WaterContainer(6);
+        this.waterContainer = new WaterContainer(3);
         this.ioService = new IOServiceImpl();
         this.blackCoffee = new BlackCoffee();
         this.capuchino = new Capuchino();
         this.hotMilk = new HotMilk();
     }
 
+    public void run(){
+        operationChoose();
+    }
 
     private void operationChoose() {
         ioService.write("Выберите операцию:");
@@ -45,31 +48,31 @@ public class CoffeeMachine {
         Integer operation = readOperation();
         switch (operation) {
             case 0:
+                ioService.write("Попробуйте снова");
                 operationChoose();
                 break;
             case 1:
-                coffeContainer.make(blackCoffee);
+                makedrink(blackCoffee);
                 break;
             case 2:
-
+                makedrink(capuchino);
                 break;
             case 3:
-
+                makedrink(hotMilk);
                 break;
             case 4:
-
-                break;
-            case 5:
+                currentCapacity();
                 break;
         }
     }
 
 
     private int readOperation() {
-        if(ioService.read() > 4){
+        int i = ioService.read();
+        if(i > 4){
             return 0;
         }
-        return ioService.read();
+        return i;
     }
     private void makedrink(Drink drink){
         if(checkcontainers(drink)) {
@@ -77,6 +80,8 @@ public class CoffeeMachine {
             garbageContainer.make(drink);
             milkContainer.make(drink);
             waterContainer.make(drink);
+            ioService.write(drink.getName() + " готов");
+            run();
         }
         ioService.write("Проверьте контейнеры");
     }
@@ -87,6 +92,13 @@ public class CoffeeMachine {
             return true;
         }
         return false;
+    }
+
+    private void currentCapacity(){
+        ioService.write(coffeContainer.getCapacity());
+        ioService.write(milkContainer.getCapacity());
+        ioService.write(waterContainer.getCapacity());
+        ioService.write(garbageContainer.getCapacity());
     }
 
 }

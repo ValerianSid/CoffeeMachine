@@ -4,6 +4,7 @@ public abstract class Drink {
     private int coffee;
     private int milk;
     private int water;
+    String name;
 
     public Drink(int coffee, int milk, int water) {
         this.coffee = coffee;
@@ -21,5 +22,9 @@ public abstract class Drink {
 
     public int getWater() {
         return water;
+    }
+
+    public String getName() {
+        return name;
     }
 }

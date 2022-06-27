@@ -21,9 +21,10 @@ public class GarbageContainer extends Container {
     }
     @Override
     public boolean checkcontainers(Drink drink) {
-        if(capacity < 6){
-            return true;
+        if(capacity > 6){
+            return false;
         }
-        return false;
+        return true;
     }
+
 }

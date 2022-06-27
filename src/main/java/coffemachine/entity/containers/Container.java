@@ -18,4 +18,7 @@ public abstract class Container {
 
     public abstract boolean checkcontainers(Drink drink);
 
+    public String getCapacity() {
+        return name + " " + String.valueOf(capacity);
+    }
 }
