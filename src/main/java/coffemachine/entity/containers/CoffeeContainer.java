@@ -11,6 +11,12 @@ public class CoffeeContainer extends Container{
     public void make(Drink drink) {
         capacity = capacity - drink.getCoffee();
     }
-
+    @Override
+    public boolean checkcontainers(Drink drink) {
+        if(capacity > drink.getCoffee()){
+            return true;
+        }
+        return false;
+    }
 
 }

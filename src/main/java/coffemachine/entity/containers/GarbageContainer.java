@@ -19,4 +19,11 @@ public class GarbageContainer extends Container {
     public void make(Drink drink) {
         capacity = capacity + 1;
     }
+    @Override
+    public boolean checkcontainers(Drink drink) {
+        if(capacity < 6){
+            return true;
+        }
+        return false;
+    }
 }

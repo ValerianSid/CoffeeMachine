@@ -16,4 +16,6 @@ public abstract class Container {
 
     public abstract void make(Drink drink);
 
+    public abstract boolean checkcontainers(Drink drink);
+
 }
